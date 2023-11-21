@@ -1,0 +1,28 @@
+{
+    "compilerOptions": {
+        "target": "ES6",
+        "module": "ES6",
+        "jsx": "react-jsx",
+        "moduleResolution": "node",
+        "rootDir": "./src",
+        "paths": {
+            "@shared/*": [
+                "./src/shared/*"
+            ],
+            "@server/*": [
+                "./src/server/*"
+            ],
+            "@client/*": [
+                "./src/client/*"
+            ],
+            "@assets/*": [
+                "./src/assets/*"
+            ],
+            "@components/*": [
+                "./src/components/*"
+            ],
+        },
+        "strict": true,
+        "sourceMap": true
+    }
+}
