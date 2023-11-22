@@ -1,0 +1,11 @@
+.smallText {
+    font-size: var(--font-size-small);
+}
+
+.bold {
+    font-weight: var(--font-weight-bold);
+}
+
+.centered {
+    text-align: center;
+}

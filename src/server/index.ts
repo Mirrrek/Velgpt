@@ -1,9 +1,6 @@
-import test from '@shared/test';
 import { createServer } from 'http';
 
 function main() {
-    test();
-
     const server = createServer();
 
     server.on('request', (req, res) => {

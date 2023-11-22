@@ -1,0 +1,11 @@
+.largeText {
+    font-size: var(--font-size-large);
+}
+
+.bold {
+    font-weight: var(--font-weight-bold);
+}
+
+.centered {
+    text-align: center;
+}
