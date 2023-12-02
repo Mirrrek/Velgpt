@@ -19,13 +19,15 @@ enum Layout {
 
 type AppState = {
     layout: Layout;
+    selectedSubject: string | null;
 }
 
 export default class App extends React.Component<{}, AppState> {
     constructor(props: {}) {
         super(props);
         this.state = {
-            layout: Layout.SUBJECT_SELECT
+            layout: Layout.SUBJECT_SELECT,
+            selectedSubject: null
         }
     }
 
@@ -39,7 +41,7 @@ export default class App extends React.Component<{}, AppState> {
     render(): React.ReactNode {
         switch (this.state.layout) {
             case Layout.SUBJECT_SELECT:
-                return <SubjectSelectLayout />
+                return <SubjectSelectLayout configuration={configuration} onSelect={(id) => { this.setState({ selectedSubject: id }); this.setLayout(Layout.SIGN_IN); }} />
             case Layout.SIGN_IN:
                 return <SignInLayout />
             case Layout.USER_OVERVIEW:
