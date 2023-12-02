@@ -1,0 +1,24 @@
+.listEntry {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    flex-grow: 1;
+    padding: 2rem;
+}
+
+.listEntry:not(:last-child) {
+    border-bottom: 1px solid var(--color-shadow-light);
+}
+
+.clickable {
+    cursor: pointer;
+}
+
+.clickable:active {
+    opacity: 0.5;
+}
+
+.centered {
+    align-items: center;
+}
