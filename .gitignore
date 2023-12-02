@@ -1,2 +1,4 @@
 /node_modules
 /dist
+/src/env/*.ts
+!/src/env/env.d.ts

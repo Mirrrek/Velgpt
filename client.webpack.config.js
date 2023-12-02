@@ -47,6 +47,7 @@ module.exports = (env, argv) => {
             extensions: ['.ts', '.tsx', '.js'],
             alias: {
                 '@shared': path.resolve(__dirname, 'src', 'shared'),
+                '@env': path.resolve(__dirname, 'src', 'env', isDevelopment ? 'dev' : 'prod'),
                 '@client': path.resolve(__dirname, 'src', 'client'),
                 '@assets': path.resolve(__dirname, 'src', 'assets'),
                 '@components': path.resolve(__dirname, 'src', 'components')

@@ -9,6 +9,9 @@
             "@shared/*": [
                 "./src/shared/*"
             ],
+            "@env": [
+                "./src/env/env.d.ts"
+            ],
             "@server/*": [
                 "./src/server/*"
             ],
@@ -20,7 +23,7 @@
             ],
             "@components/*": [
                 "./src/components/*"
-            ],
+            ]
         },
         "strict": true,
         "sourceMap": true
