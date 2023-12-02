@@ -35,10 +35,21 @@ export default class App extends React.Component<{}, AppState> {
         }
     }
 
+    componentDidMount(): void {
+        window.addEventListener('hashchange', () => {
+            if (window.location.hash !== '') {
+                return;
+            }
+            if (this.state.layout > Layout.ANSWER_OVERVIEW) {
+                this.setLayout(Layout.ANSWER_OVERVIEW);
+            } else if (this.state.layout !== Layout.SUBJECT_SELECT) {
+                window.location.reload();
+            }
+        });
+    }
+
     setLayout(layout: Layout): void {
-        if (layout > Layout.ANSWER_OVERVIEW) {
-            window.location.hash = '#';
-        }
+        window.location.hash = '#back-block';
         this.setState({ layout });
     }
 
