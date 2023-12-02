@@ -1,5 +1,6 @@
 import * as React from 'react';
 import * as packets from '@shared/packets';
+import log from '@shared/log';
 import configuration from '@shared/configuration';
 import SubjectSelectLayout from '@components/layouts/SubjectSelectLayout';
 import SignInLayout from '@components/layouts/SignInLayout';
@@ -65,11 +66,13 @@ export default class App extends React.Component<{}, AppState> {
                         this.setLayout(Layout.SIGN_IN);
                         return;
                     }
+                    log('INFO', 'Authenticating to server');
                     window.connection.send<packets.AuthenticatePacket>(packets.PacketType.SB_AUTHENTICATE, {
                         subject: this.state.selectedSubject!,
                         token: credentialResponse.credential as string
                     });
                     window.connection.await<packets.AuthenticatedPacket>(packets.PacketType.CB_AUTHENTICATED).then((packet) => {
+                        log('INFO', 'Authentication successful');
                         this.setLayout(Layout.USER_OVERVIEW);
                     });
                     this.setLayout(Layout.LOADING);
