@@ -28,6 +28,10 @@ function main() {
             log('ERROR', 'Received ERROR_INVALID_SUBJECT');
         });
 
+        connection.on<packets.ErrorAuthenticationFailedPacket>(packets.PacketType.CB_ERROR_AUTHENTICATION_FAILED, (data) => {
+            log('ERROR', 'Received ERROR_AUTHENTICATION_FAILED');
+        });
+
         connection.on<packets.ErrorSessionExistsPacket>(packets.PacketType.CB_ERROR_SESSION_EXISTS, (data) => {
             log('ERROR', 'Received ERROR_SESSION_EXISTS');
         });

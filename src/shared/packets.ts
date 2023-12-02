@@ -24,9 +24,10 @@ export enum PacketType {
     CB_ERROR_INVALID_PACKET = 0xf0,         // {}
     CB_ERROR_INVALID_STATE = 0xf1,          // {}
     CB_ERROR_INVALID_SUBJECT = 0xf3,        // {}
-    CB_ERROR_SESSION_EXISTS = 0xf4,         // {}
-    CB_ERROR_INVALID_TERM = 0xf5,           // {}
-    CB_ERROR_INVALID_GROUP = 0xf6,          // {}
+    CB_ERROR_AUTHENTICATION_FAILED = 0xf4,  // {}
+    CB_ERROR_SESSION_EXISTS = 0xf5,         // {}
+    CB_ERROR_INVALID_TERM = 0xf6,           // {}
+    CB_ERROR_INVALID_GROUP = 0xf7,          // {}
     CB_ERROR_UNEXPECTED = 0xff,             // {}
 }
 
@@ -58,6 +59,7 @@ export type UpdateAnswerListPacket = IPacket<PacketType.CB_UPDATE_ANSWER_LIST, {
 export type ErrorInvalidPacketPacket = IPacket<PacketType.CB_ERROR_INVALID_PACKET, {}>;
 export type ErrorInvalidStatePacket = IPacket<PacketType.CB_ERROR_INVALID_STATE, {}>;
 export type ErrorInvalidSubjectPacket = IPacket<PacketType.CB_ERROR_INVALID_SUBJECT, {}>;
+export type ErrorAuthenticationFailedPacket = IPacket<PacketType.CB_ERROR_AUTHENTICATION_FAILED, {}>;
 export type ErrorSessionExistsPacket = IPacket<PacketType.CB_ERROR_SESSION_EXISTS, {}>;
 export type ErrorInvalidTermPacket = IPacket<PacketType.CB_ERROR_INVALID_TERM, {}>;
 export type ErrorInvalidGroupPacket = IPacket<PacketType.CB_ERROR_INVALID_GROUP, {}>;
