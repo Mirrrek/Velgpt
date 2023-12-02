@@ -48,7 +48,7 @@ function main() {
             log('ERROR', 'Received ERROR_UNEXPECTED');
         });
 
-        const random = (Math.random() * 0xffffffff) | 0;
+        const random = Math.abs((Math.random() * 0xffffffff) | 0);
         connection.send<packets.PingPacket>(packets.PacketType.SB_PING, { random });
         connection.await<packets.PongPacket>(packets.PacketType.CB_PONG).then((packet) => {
             if (packet.echo !== random) {
