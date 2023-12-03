@@ -26,6 +26,7 @@ type AppState = {
     layout: Layout;
     selectedSubject: string | null;
     userList: { name: string, group: string | null }[];
+    answerList: ({ id: number, user: string, number: string, question: string, state: 'queued' | 'generating' } | { id: number, user: string, number: string, question: string, state: 'answered', answer: string })[];
 }
 
 export default class App extends React.Component<{}, AppState> {
@@ -34,7 +35,8 @@ export default class App extends React.Component<{}, AppState> {
         this.state = {
             layout: Layout.SUBJECT_SELECT,
             selectedSubject: null,
-            userList: []
+            userList: [],
+            answerList: []
         }
     }
 
@@ -85,9 +87,23 @@ export default class App extends React.Component<{}, AppState> {
                     this.setLayout(Layout.LOADING);
                 }} />
             case Layout.USER_OVERVIEW:
-                return <UserOverviewLayout userList={this.state.userList} onContinue={() => { this.setLayout(Layout.GROUP_SELECT); }} />
+                return <UserOverviewLayout configuration={configuration} selectedSubject={this.state.selectedSubject as string} userList={this.state.userList} onContinue={() => { this.setLayout(Layout.GROUP_SELECT); }} />
             case Layout.GROUP_SELECT:
-                return <GroupSelectLayout />
+                return <GroupSelectLayout configuration={configuration} selectedSubject={this.state.selectedSubject as string} onSelect={(id) => {
+                    if (window.connection === undefined) {
+                        this.setLayout(Layout.GROUP_SELECT);
+                        return;
+                    }
+                    log('INFO', `Selecting group "${id}"`);
+                    window.connection.send<packets.RegisterGroupPacket>(packets.PacketType.SB_REGISTER_GROUP, {
+                        group: id
+                    });
+                    window.connection?.on<packets.UpdateAnswerListPacket>(packets.PacketType.CB_UPDATE_ANSWER_LIST, (packet) => {
+                        log('INFO', 'Received answer list update');
+                        this.setState({ answerList: packet.answers });
+                    });
+                    this.setLayout(Layout.ANSWER_OVERVIEW);
+                }} />
             case Layout.ANSWER_OVERVIEW:
                 return <AnswerOverviewLayout />
             case Layout.QUESTION_PICK:
