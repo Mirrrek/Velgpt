@@ -27,3 +27,8 @@ body {
     color: var(--color-light);
     background-color: var(--color-dark);
 }
+
+.material-symbols-outlined {
+    font-size: 2rem;
+    margin-top: 0.35rem;
+}

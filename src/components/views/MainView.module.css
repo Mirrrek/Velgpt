@@ -20,5 +20,12 @@
 }
 
 .button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    margin: 2rem 1.5rem;
+    border-radius: 1rem;
+    background-color: var(--color-accent);
     cursor: pointer;
 }
