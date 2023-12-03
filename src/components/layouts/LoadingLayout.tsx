@@ -8,7 +8,7 @@ export type LoadingLayoutProps = {}
 export default class LoadingLayout extends React.Component<LoadingLayoutProps> {
     render(): React.ReactNode {
         return <MainView>
-            <ListEntry centered>
+            <ListEntry centered stretch>
                 <Loading />
             </ListEntry>
         </MainView>

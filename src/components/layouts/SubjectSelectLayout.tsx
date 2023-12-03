@@ -12,7 +12,7 @@ export type SubjectSelectLayoutProps = {
 export default class SubjectSelectLayout extends React.Component<SubjectSelectLayoutProps> {
     render(): React.ReactNode {
         return <MainView>
-            {this.props.configuration.map((subject) => <ListEntry key={subject.id} onClick={() => { this.props.onSelect(subject.id) }}>
+            {this.props.configuration.map((subject) => <ListEntry key={subject.id} stretch onClick={() => { this.props.onSelect(subject.id) }}>
                 <LargeText centered>{subject.name}</LargeText>
             </ListEntry>)}
         </MainView>

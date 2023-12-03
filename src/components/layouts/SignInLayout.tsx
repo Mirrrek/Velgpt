@@ -27,7 +27,7 @@ export default class SignInLayout extends React.Component<SignInLayoutProps, Sig
         }
 
         return <MainView>
-            <ListEntry centered>
+            <ListEntry centered stretch>
                 <GoogleOAuthProvider clientId={env.GOOGLE_CLIENT_ID}>
                     <GoogleLogin shape='pill' text='continue_with' onSuccess={this.props.onSignIn} onError={() => { this.setState({ error: true }) }} />
                 </GoogleOAuthProvider>

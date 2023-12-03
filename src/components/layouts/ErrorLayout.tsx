@@ -11,7 +11,7 @@ export type ErrorLayoutProps = {
 export default class ErrorLayout extends React.Component<ErrorLayoutProps> {
     render(): React.ReactNode {
         return <MainView>
-            <ListEntry centered>
+            <ListEntry centered stretch>
                 <LargeText centered>An error occurred</LargeText>
                 <MediumText centered>{this.props.message ?? 'Unexpected error'}</MediumText>
             </ListEntry>
