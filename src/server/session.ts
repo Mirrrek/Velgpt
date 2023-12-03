@@ -1,4 +1,5 @@
 import Connection from '@shared/connection';
+import * as packets from '@shared/packets';
 
 type User = {
     name: string;
@@ -17,6 +18,27 @@ export default class Session {
 
     add(userID: string, name: string, connection: Connection): void {
         this.users.set(userID, { name, group: null, connection });
+        this.emitUserList();
+
+        connection.on<packets.RegisterGroupPacket>(packets.PacketType.SB_REGISTER_GROUP, (data) => {
+            if (typeof data.group !== 'string') {
+                connection.send<packets.ErrorInvalidPacketPacket>(packets.PacketType.CB_ERROR_INVALID_PACKET, {});
+                return;
+            }
+
+            if (!this.users.has(userID)) {
+                connection.send<packets.ErrorInvalidStatePacket>(packets.PacketType.CB_ERROR_INVALID_STATE, {});
+                return;
+            }
+
+            if (this.users.get(userID)!.group !== null) {
+                connection.send<packets.ErrorInvalidStatePacket>(packets.PacketType.CB_ERROR_INVALID_STATE, {});
+                return;
+            }
+
+            this.users.get(userID)!.group = data.group;
+            this.emitUserList();
+        });
     }
 
     has(userID: string): boolean {
@@ -25,9 +47,14 @@ export default class Session {
 
     remove(userID: string): void {
         this.users.delete(userID);
+        this.emitUserList();
     }
 
-    getUserList(): { name: string; group: string | null; }[] {
-        return Array.from(this.users.values()).map((user) => ({ name: user.name, group: user.group }));
+    private emitUserList(): void {
+        this.users.forEach((user) => {
+            user.connection.send<packets.UpdateUserListPacket>(packets.PacketType.CB_UPDATE_USER_LIST, {
+                users: Array.from(this.users.values()).map((user) => ({ name: user.name, group: user.group }))
+            });
+        });
     }
 }

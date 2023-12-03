@@ -87,12 +87,8 @@ function main() {
                 log('INFO', `<${req.socket.remoteAddress}> Joining session as "${payload.name ?? 'Unknown user'}" (${payload.sub}) for subject "${data.subject}"`);
 
                 state = { session: sessions.get(data.subject)!, userID: payload.sub };
-                sessions.get(data.subject)!.add(payload.sub, payload.name ?? 'Unknown user', connection);
                 connection.send<packets.AuthenticatedPacket>(packets.PacketType.CB_AUTHENTICATED, {});
-
-                connection.send<packets.UpdateUserListPacket>(packets.PacketType.CB_UPDATE_USER_LIST, {
-                    users: state.session!.getUserList()
-                });
+                sessions.get(data.subject)!.add(payload.sub, payload.name ?? 'Unknown user', connection);
             });
         });
 
