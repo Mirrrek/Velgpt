@@ -25,6 +25,7 @@ enum Layout {
 type AppState = {
     layout: Layout;
     selectedSubject: string | null;
+    userList: { name: string, group: string | null }[];
 }
 
 export default class App extends React.Component<{}, AppState> {
@@ -32,7 +33,8 @@ export default class App extends React.Component<{}, AppState> {
         super(props);
         this.state = {
             layout: Layout.SUBJECT_SELECT,
-            selectedSubject: null
+            selectedSubject: null,
+            userList: []
         }
     }
 
@@ -74,11 +76,16 @@ export default class App extends React.Component<{}, AppState> {
                     window.connection.await<packets.AuthenticatedPacket>(packets.PacketType.CB_AUTHENTICATED).then((packet) => {
                         log('INFO', 'Authentication successful');
                         this.setLayout(Layout.USER_OVERVIEW);
+
+                        window.connection?.on<packets.UpdateUserListPacket>(packets.PacketType.CB_UPDATE_USER_LIST, (packet) => {
+                            log('INFO', `Received user list update: ${packet.users.map((user) => `"${user.name}"`).join(', ') || '-'}`);
+                            this.setState({ userList: packet.users });
+                        });
                     });
                     this.setLayout(Layout.LOADING);
                 }} />
             case Layout.USER_OVERVIEW:
-                return <UserOverviewLayout />
+                return <UserOverviewLayout userList={this.state.userList} onContinue={() => { this.setLayout(Layout.GROUP_SELECT); }} />
             case Layout.GROUP_SELECT:
                 return <GroupSelectLayout />
             case Layout.ANSWER_OVERVIEW:
