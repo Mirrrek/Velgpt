@@ -10,6 +10,13 @@ import * as ReactDOM from 'react-dom/client';
 import { ErrorBoundary } from 'react-error-boundary';
 
 function main() {
+    const root = ReactDOM.createRoot(document.getElementById('app')!);
+
+    window.addEventListener('error', (event) => {
+        log('ERROR', event.message);
+        root.render(React.createElement(ErrorLayout));
+    });
+
     const socket = new WebSocket(env.WEBSOCKET_URL);
     socket.addEventListener('open', () => {
         log('INFO', 'Connected to server');
@@ -61,8 +68,11 @@ function main() {
         });
     });
 
-    const errorBoundary = React.createElement(ErrorBoundary, { fallback: React.createElement(ErrorLayout) }, React.createElement(App));
-    ReactDOM.createRoot(document.getElementById('app')!).render(errorBoundary);
+    socket.addEventListener('error', (event) => {
+        throw new Error('WebSocket error');
+    });
+
+    root.render(React.createElement(ErrorBoundary, { fallback: React.createElement(ErrorLayout) }, React.createElement(App)));
 }
 
 main();
