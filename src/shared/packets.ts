@@ -17,9 +17,10 @@ export enum PacketType {
     SB_REGISTER_GROUP = 0x50,               // { group: string }
 
     SB_CREATE_QUESTION = 0x60,              // { number: string, question: string }
-    SB_REMOVE_QUESTION = 0x61,              // { id: number }
+    SB_ANSWER_QUESTION = 0x61,              // { id: number, answer: string }
+    SB_REMOVE_QUESTION = 0x62,              // { id: number }
 
-    CB_UPDATE_ANSWER_LIST = 0x70,           // { answers: ({ id: number, user: string, number: string, question: string, state: 'queued' | 'generating' } | { id: number, user: string, number: string, question: string, state: 'answered', answer: string })[] }
+    CB_UPDATE_ANSWER_LIST = 0x70,           // ({ id: number, user: string, question: string | null, type: 'gpt', state: 'queued', request: string } | { id: number, user: string, question: string | null, type: 'gpt', state: 'generating', request: string, steps: ({ type: 'searching', content: string, link: string } | { type: 'fetching', content: string, link: string } | { type: 'done' })[] } | { id: number, user: string, question: string | null, answer: string | null, type: 'gpt', request: string, state: 'answered', steps: ({ type: 'searching', content: string, link: string } | { type: 'fetching', content: string, link: string } | { type: 'done' })[], response: string } | { id: number, user: string, question: string | null, answer: string, type: 'manual' })[]
 
     CB_ERROR_INVALID_PACKET = 0xf0,         // {}
     CB_ERROR_INVALID_STATE = 0xf1,          // {}
@@ -52,9 +53,10 @@ export type UpdateTermListPacket = IPacket<PacketType.CB_UPDATE_TERM_LIST, { ter
 export type RegisterGroupPacket = IPacket<PacketType.SB_REGISTER_GROUP, { group: string }>;
 
 export type CreateQuestionPacket = IPacket<PacketType.SB_CREATE_QUESTION, { number: string, question: string }>;
+export type AnswerQuestionPacket = IPacket<PacketType.SB_ANSWER_QUESTION, { id: number, answer: string }>;
 export type RemoveQuestionPacket = IPacket<PacketType.SB_REMOVE_QUESTION, { id: number }>;
 
-export type UpdateAnswerListPacket = IPacket<PacketType.CB_UPDATE_ANSWER_LIST, { answers: ({ id: number, user: string, number: string, question: string, state: 'queued' | 'generating' } | { id: number, user: string, number: string, question: string, state: 'answered', answer: string })[] }>;
+export type UpdateAnswerListPacket = IPacket<PacketType.CB_UPDATE_ANSWER_LIST, { answers: ({ id: number, user: string, question: string | null, type: 'gpt', state: 'queued', request: string } | { id: number, user: string, question: string | null, type: 'gpt', state: 'generating', request: string, steps: ({ type: 'searching', content: string, link: string } | { type: 'fetching', content: string, link: string } | { type: 'done' })[] } | { id: number, user: string, question: string | null, answer: string | null, type: 'gpt', request: string, state: 'answered', steps: ({ type: 'searching', content: string, link: string } | { type: 'fetching', content: string, link: string } | { type: 'done' })[], response: string } | { id: number, user: string, question: string | null, answer: string, type: 'manual' })[] }>;
 
 export type ErrorInvalidPacketPacket = IPacket<PacketType.CB_ERROR_INVALID_PACKET, {}>;
 export type ErrorInvalidStatePacket = IPacket<PacketType.CB_ERROR_INVALID_STATE, {}>;

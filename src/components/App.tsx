@@ -26,7 +26,7 @@ type AppState = {
     layout: Layout;
     selectedSubject: string | null;
     userList: { name: string, group: string | null }[];
-    answerList: ({ id: number, user: string, number: string, question: string, state: 'queued' | 'generating' } | { id: number, user: string, number: string, question: string, state: 'answered', answer: string })[];
+    answerList: ({ id: number, user: string, question: string | null, type: 'gpt', state: 'queued', request: string } | { id: number, user: string, question: string | null, type: 'gpt', state: 'generating', request: string, steps: ({ type: 'searching', content: string, link: string } | { type: 'fetching', content: string, link: string } | { type: 'done' })[] } | { id: number, user: string, question: string | null, answer: string | null, type: 'gpt', request: string, state: 'answered', steps: ({ type: 'searching', content: string, link: string } | { type: 'fetching', content: string, link: string } | { type: 'done' })[], response: string } | { id: number, user: string, question: string | null, answer: string, type: 'manual' })[];
 }
 
 export default class App extends React.Component<{}, AppState> {
