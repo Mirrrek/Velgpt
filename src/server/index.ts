@@ -18,7 +18,7 @@ function main() {
     server.on('request', cors);
 
     server.listen(443, () => {
-        console.log('Server listening on port 443');
+        log('INFO', 'Listening on port 443');
     });
 
     const wss = new WebSocketServer({ server });
