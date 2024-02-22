@@ -1,13 +1,27 @@
 .listEntry {
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: center;
     width: 100%;
-    padding: 1rem 1.5rem;
+    padding: 1.5rem;
 }
 
-.listEntry:not(:last-child) {
-    border-bottom: 1px solid var(--color-shadow-light);
+.listEntry+.listEntry {
+    border-top: 1px solid var(--color-shadow-light);
+}
+
+.indicator::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    width: 5px;
+    height: 50%;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+    background-color: var(--color-accent);
 }
 
 .stretch {

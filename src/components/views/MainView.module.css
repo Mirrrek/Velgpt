@@ -1,9 +1,11 @@
 .mainView {
+    position: relative;
     display: flex;
     flex-direction: column;
     width: 100%;
     min-height: 100vh;
     min-height: 100dvh;
+    background-color: var(--color-dark);
 }
 
 @media screen and (min-width: 768px) {
@@ -16,17 +18,21 @@
 
 .title {
     width: 100%;
-    padding: 1rem;
+    padding: 1.5rem;
     background-color: var(--color-accent);
 }
 
 .button {
+    position: absolute;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 1rem;
-    margin: 2rem 1.5rem;
-    border-radius: 1rem;
+    bottom: 2rem;
+    right: 2rem;
+    padding: 2rem;
+    min-width: 5rem;
+    min-height: 5rem;
+    border-radius: 1.5rem;
     background-color: var(--color-accent);
     cursor: pointer;
 }

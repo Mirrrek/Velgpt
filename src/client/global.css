@@ -3,10 +3,11 @@
 
 :root {
     --color-light: #f0f0f0;
-    --color-accent: #36557a;
-    --color-dark: #202122;
-    --color-shadow-light: #a0a0a07f;
-    --color-shadow-dark: #1010107f;
+    --color-accent: #262f3b;
+    --color-dark: #121519;
+    --color-background: #101317;
+    --color-shadow-light: #80808030;
+    --color-shadow-dark: #0b0a197f;
     --font-size-small: 1.2rem;
     --font-size-medium: 1.4rem;
     --font-size-large: 2.5rem;
@@ -25,10 +26,10 @@ body {
     font-size: var(--font-size-medium);
     font-weight: var(--font-weight-normal);
     color: var(--color-light);
-    background-color: var(--color-dark);
+    background-color: var(--color-background);
 }
 
 .material-symbols-outlined {
-    font-size: 2rem;
+    font-size: 2.5rem;
     margin-top: 0.35rem;
 }
