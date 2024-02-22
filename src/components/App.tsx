@@ -7,6 +7,7 @@ import SignInLayout from '@components/layouts/SignInLayout';
 import UserOverviewLayout from '@components/layouts/UserOverviewLayout';
 import GroupSelectLayout from '@components/layouts/GroupSelectLayout';
 import AnswerOverviewLayout from '@components/layouts/AnswerOverviewLayout';
+import AnswerDetailLayout from './layouts/AnswerDetailLayout';
 import QuestionPickLayout from '@components/layouts/QuestionPickLayout';
 import QuestionSubmitLayout from '@components/layouts/QuestionSubmitLayout';
 import LoadingLayout from '@components/layouts/LoadingLayout';
@@ -18,6 +19,7 @@ enum Layout {
     USER_OVERVIEW,
     GROUP_SELECT,
     ANSWER_OVERVIEW,
+    ANSWER_DETAIL,
     QUESTION_PICK,
     QUESTION_SUBMIT
 }
@@ -106,6 +108,8 @@ export default class App extends React.Component<{}, AppState> {
                 }} />
             case Layout.ANSWER_OVERVIEW:
                 return <AnswerOverviewLayout />
+            case Layout.ANSWER_DETAIL:
+                return <AnswerDetailLayout />
             case Layout.QUESTION_PICK:
                 return <QuestionPickLayout />
             case Layout.QUESTION_SUBMIT:
