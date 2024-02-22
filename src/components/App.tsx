@@ -27,6 +27,8 @@ enum Layout {
 type AppState = {
     layout: Layout;
     selectedSubject: string | null;
+    selectedGroup: string | null;
+    selectedThread: number | null;
     userList: packets.User[];
     threadList: packets.Thread[];
 }
@@ -37,6 +39,8 @@ export default class App extends React.Component<{}, AppState> {
         this.state = {
             layout: Layout.SUBJECT_SELECT,
             selectedSubject: null,
+            selectedGroup: null,
+            selectedThread: null,
             userList: [],
             threadList: []
         }
@@ -104,10 +108,14 @@ export default class App extends React.Component<{}, AppState> {
                         log('INFO', 'Received answer list update');
                         this.setState({ threadList: packet.threads });
                     });
+                    this.setState({ selectedGroup: id });
                     this.setLayout(Layout.ANSWER_OVERVIEW);
                 }} />
             case Layout.ANSWER_OVERVIEW:
-                return <AnswerOverviewLayout />
+                return <AnswerOverviewLayout selectedSubject={this.state.selectedSubject as string} selectedGroup={this.state.selectedGroup as string} threadList={this.state.threadList} onNewThread={() => { this.setLayout(Layout.QUESTION_PICK); }} onThreadSelect={(thread) => {
+                    this.setState({ selectedThread: thread.id });
+                    this.setLayout(Layout.ANSWER_DETAIL);
+                }} />
             case Layout.ANSWER_DETAIL:
                 return <AnswerDetailLayout />
             case Layout.QUESTION_PICK:
