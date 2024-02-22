@@ -14,7 +14,7 @@ export type UserOverviewLayoutProps = {
 export default class UserOverviewLayout extends React.Component<UserOverviewLayoutProps> {
     render(): React.ReactNode {
         return <MainView title='Users' button={{ onClick: this.props.onContinue, icon: 'arrow_circle_right' }}>
-            {this.props.userList.map((user, i) => <ListEntry key={user.name}>
+            {this.props.userList.map((user, i) => <ListEntry key={user.name} indicator>
                 <SmallText detail={user.group !== null ? configuration.find((subject) => subject.id === this.props.selectedSubject)?.groups.find((group) => group.id === user.group)?.name : undefined}>{user.name}</SmallText>
             </ListEntry>)}
         </MainView>
