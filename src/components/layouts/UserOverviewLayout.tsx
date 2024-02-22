@@ -1,13 +1,12 @@
 import * as React from 'react';
 import * as packets from '@shared/packets';
-import configuration, { Configuration } from '@shared/configuration';
+import configuration from '@shared/configuration';
 import MainView from '@components/views/MainView';
 import ListEntry from '@components/elements/ListEntry';
 import SmallText from '@components/elements/SmallText';
 import TextContainer from '@components/elements/TextContainer';
 
 export type UserOverviewLayoutProps = {
-    configuration: Configuration;
     selectedSubject: string;
     userList: packets.User[];
     onContinue: () => void;

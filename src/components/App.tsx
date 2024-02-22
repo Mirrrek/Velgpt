@@ -63,7 +63,7 @@ export default class App extends React.Component<{}, AppState> {
             case Layout.LOADING:
                 return <LoadingLayout />
             case Layout.SUBJECT_SELECT:
-                return <SubjectSelectLayout configuration={configuration} onSelect={(id) => { this.setState({ selectedSubject: id }); this.setLayout(Layout.SIGN_IN); }} />
+                return <SubjectSelectLayout onSelect={(id) => { this.setState({ selectedSubject: id }); this.setLayout(Layout.SIGN_IN); }} />
             case Layout.SIGN_IN:
                 return <SignInLayout onSignIn={(credentialResponse) => {
                     if (window.connection === undefined) {
@@ -87,9 +87,9 @@ export default class App extends React.Component<{}, AppState> {
                     this.setLayout(Layout.LOADING);
                 }} />
             case Layout.USER_OVERVIEW:
-                return <UserOverviewLayout configuration={configuration} selectedSubject={this.state.selectedSubject as string} userList={this.state.userList} onContinue={() => { this.setLayout(Layout.GROUP_SELECT); }} />
+                return <UserOverviewLayout selectedSubject={this.state.selectedSubject as string} userList={this.state.userList} onContinue={() => { this.setLayout(Layout.GROUP_SELECT); }} />
             case Layout.GROUP_SELECT:
-                return <GroupSelectLayout configuration={configuration} selectedSubject={this.state.selectedSubject as string} onSelect={(id) => {
+                return <GroupSelectLayout selectedSubject={this.state.selectedSubject as string} onSelect={(id) => {
                     if (window.connection === undefined) {
                         this.setLayout(Layout.GROUP_SELECT);
                         return;
