@@ -25,8 +25,8 @@ enum Layout {
 type AppState = {
     layout: Layout;
     selectedSubject: string | null;
-    userList: { name: string, group: string | null }[];
-    answerList: ({ id: number, user: string, question: string | null, type: 'gpt', state: 'queued', request: string } | { id: number, user: string, question: string | null, type: 'gpt', state: 'generating', request: string, steps: ({ type: 'searching', content: string, link: string } | { type: 'fetching', content: string, link: string } | { type: 'done' })[] } | { id: number, user: string, question: string | null, answer: string | null, type: 'gpt', request: string, state: 'answered', steps: ({ type: 'searching', content: string, link: string } | { type: 'fetching', content: string, link: string } | { type: 'done' })[], response: string } | { id: number, user: string, question: string | null, answer: string, type: 'manual' })[];
+    userList: packets.User[];
+    threadList: packets.Thread[];
 }
 
 export default class App extends React.Component<{}, AppState> {
@@ -36,7 +36,7 @@ export default class App extends React.Component<{}, AppState> {
             layout: Layout.SUBJECT_SELECT,
             selectedSubject: null,
             userList: [],
-            answerList: []
+            threadList: []
         }
     }
 
@@ -98,9 +98,9 @@ export default class App extends React.Component<{}, AppState> {
                     window.connection.send<packets.RegisterGroupPacket>(packets.PacketType.SB_REGISTER_GROUP, {
                         group: id
                     });
-                    window.connection?.on<packets.UpdateAnswerListPacket>(packets.PacketType.CB_UPDATE_ANSWER_LIST, (packet) => {
+                    window.connection?.on<packets.UpdateThreadListPacket>(packets.PacketType.CB_UPDATE_THREAD_LIST, (packet) => {
                         log('INFO', 'Received answer list update');
-                        this.setState({ answerList: packet.answers });
+                        this.setState({ threadList: packet.threads });
                     });
                     this.setLayout(Layout.ANSWER_OVERVIEW);
                 }} />
