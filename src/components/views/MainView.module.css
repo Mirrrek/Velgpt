@@ -29,10 +29,13 @@
     align-items: center;
     bottom: 2rem;
     right: 2rem;
-    padding: 2rem;
     min-width: 5rem;
     min-height: 5rem;
     border-radius: 1.5rem;
     background-color: var(--color-accent);
     cursor: pointer;
+}
+
+.padded {
+    padding: 2rem;
 }

@@ -29,7 +29,7 @@ export default class MainView extends React.Component<MainViewProps> {
                 <MediumText>{this.props.title}</MediumText>
             </div>}
             {this.props.children}
-            {this.props.button && <div className={styles.button} onClick={this.props.button.onClick}>
+            {this.props.button && <div className={styles.button + (!isIconButton(this.props.button) ? ' ' + styles.padded : '')} onClick={this.props.button.onClick}>
                 <MediumText>{isIconButton(this.props.button) ? <span className='material-symbols-outlined'>{this.props.button.icon}</span> : this.props.button.text}</MediumText>
             </div>}
         </div>
