@@ -1,0 +1,18 @@
+.tinyText {
+    font-size: var(--font-size-tiny);
+    font-weight: var(--font-weight-normal);
+    opacity: 1;
+    text-align: left;
+}
+
+.bold {
+    font-weight: var(--font-weight-bold);
+}
+
+.gray {
+    opacity: 0.25;
+}
+
+.centered {
+    text-align: center;
+}
