@@ -1,5 +1,8 @@
 .smallText {
     font-size: var(--font-size-small);
+    font-weight: var(--font-weight-normal);
+    opacity: 1;
+    text-align: left;
 }
 
 .bold {
