@@ -5,7 +5,7 @@ import LargeText from '@components/elements/LargeText';
 import MediumText from '@components/elements/MediumText';
 
 export type ErrorLayoutProps = {
-    message?: string;
+    message?: React.ReactNode;
 }
 
 export default class ErrorLayout extends React.Component<ErrorLayoutProps> {
@@ -13,7 +13,7 @@ export default class ErrorLayout extends React.Component<ErrorLayoutProps> {
         return <MainView>
             <ListEntry centered stretch>
                 <LargeText centered>An error occurred</LargeText>
-                <MediumText centered>{this.props.message ?? 'Unexpected error'}</MediumText>
+                {(this.props.message === undefined || typeof this.props.message === 'string') ? <MediumText centered>{this.props.message ?? 'Unexpected error'}</MediumText> : this.props.message}
             </ListEntry>
         </MainView>
     }

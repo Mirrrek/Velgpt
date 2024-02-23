@@ -4,6 +4,7 @@ import configuration from '@shared/configuration';
 import MainView from '@components/views/MainView';
 import ListEntry from '@components/elements/ListEntry';
 import SmallText from '@components/elements/SmallText';
+import MediumText from '@components/elements/MediumText';
 import CategoryIcon from '@components/elements/CategoryIcon';
 import TextContainer from '@components/elements/TextContainer';
 
@@ -17,7 +18,7 @@ export type ThreadOverviewLayoutProps = {
 
 export default class ThreadOverviewLayout extends React.Component<ThreadOverviewLayoutProps> {
     render(): React.ReactNode {
-        return <MainView title={`Group ${configuration.find((subject) => subject.id === this.props.selectedSubject)?.groups.find((group) => group.id === this.props.selectedGroup)?.name} Answers`} button={{ icon: 'add', onClick: this.props.onNewThread }}>
+        return <MainView title={<MediumText>Group <MediumText bold>{configuration.find((subject) => subject.id === this.props.selectedSubject)?.groups.find((group) => group.id === this.props.selectedGroup)?.name}</MediumText> Answers</MediumText>} button={{ icon: 'add', onClick: this.props.onNewThread }}>
             {this.props.threadList.sort((a, b) => (a.question && b.question) ? a.question.localeCompare(b.question) : (a.question ? -1 : (b.question ? 1 : 0))).map((thread, i) => <ListEntry key={thread.id} indicator onClick={() => { this.props.onThreadSelect(thread); }}>
                 <TextContainer>
                     <CategoryIcon>{thread.question ?? '-'}</CategoryIcon>

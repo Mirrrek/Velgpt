@@ -14,7 +14,7 @@ type TextButton = {
 
 export type MainViewProps = {
     children?: React.ReactNode;
-    title?: string;
+    title?: React.ReactNode;
     button?: IconButton | TextButton;
 }
 
@@ -26,7 +26,7 @@ export default class MainView extends React.Component<MainViewProps> {
     render(): React.ReactNode {
         return <div className={styles.mainView}>
             {this.props.title && <div className={styles.title}>
-                <MediumText>{this.props.title}</MediumText>
+                {typeof this.props.title === 'string' ? <MediumText>{this.props.title}</MediumText> : this.props.title}
             </div>}
             {this.props.children}
             {this.props.button && <div className={styles.button + (!isIconButton(this.props.button) ? ' ' + styles.padded : '')} onClick={this.props.button.onClick}>
