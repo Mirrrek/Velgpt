@@ -10,6 +10,6 @@ export type MediumTextProps = {
 
 export default class MediumText extends React.Component<MediumTextProps> {
     render(): React.ReactNode {
-        return <p className={styles.mediumText + (this.props.bold ? ' ' + styles.bold : '') + (this.props.gray ? ' ' + styles.gray : '') + (this.props.centered ? ' ' + styles.centered : '')}>{this.props.children}</p>
+        return <span className={styles.mediumText + (this.props.bold ? ' ' + styles.bold : '') + (this.props.gray ? ' ' + styles.gray : '') + (this.props.centered ? ' ' + styles.centered : '')}>{this.props.children}</span>
     }
 }

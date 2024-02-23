@@ -10,6 +10,6 @@ export type LargeTextProps = {
 
 export default class LargeText extends React.Component<LargeTextProps> {
     render(): React.ReactNode {
-        return <p className={styles.largeText + (this.props.bold ? ' ' + styles.bold : '') + (this.props.gray ? ' ' + styles.gray : '') + (this.props.centered ? ' ' + styles.centered : '')}>{this.props.children}</p>
+        return <span className={styles.largeText + (this.props.bold ? ' ' + styles.bold : '') + (this.props.gray ? ' ' + styles.gray : '') + (this.props.centered ? ' ' + styles.centered : '')}>{this.props.children}</span>
     }
 }

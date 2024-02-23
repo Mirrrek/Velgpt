@@ -10,6 +10,6 @@ export type SmallTextProps = {
 
 export default class SmallText extends React.Component<SmallTextProps> {
     render(): React.ReactNode {
-        return <p className={styles.smallText + (this.props.bold ? ' ' + styles.bold : '') + (this.props.gray ? ' ' + styles.gray : '') + (this.props.centered ? ' ' + styles.centered : '')}>{this.props.children}</p>
+        return <span className={styles.smallText + (this.props.bold ? ' ' + styles.bold : '') + (this.props.gray ? ' ' + styles.gray : '') + (this.props.centered ? ' ' + styles.centered : '')}>{this.props.children}</span>
     }
 }
