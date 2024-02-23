@@ -1,13 +1,12 @@
 import * as React from 'react';
 import * as packets from '@shared/packets';
 import log from '@shared/log';
-import configuration from '@shared/configuration';
 import SubjectSelectLayout from '@components/layouts/SubjectSelectLayout';
 import SignInLayout from '@components/layouts/SignInLayout';
 import UserOverviewLayout from '@components/layouts/UserOverviewLayout';
 import GroupSelectLayout from '@components/layouts/GroupSelectLayout';
-import AnswerOverviewLayout from '@components/layouts/AnswerOverviewLayout';
-import AnswerDetailLayout from './layouts/AnswerDetailLayout';
+import ThreadOverviewLayout from '@components/layouts/ThreadOverviewLayout';
+import ThreadDetailLayout from './layouts/ThreadDetailLayout';
 import QuestionPickLayout from '@components/layouts/QuestionPickLayout';
 import QuestionSubmitLayout from '@components/layouts/QuestionSubmitLayout';
 import LoadingLayout from '@components/layouts/LoadingLayout';
@@ -18,8 +17,8 @@ enum Layout {
     SIGN_IN,
     USER_OVERVIEW,
     GROUP_SELECT,
-    ANSWER_OVERVIEW,
-    ANSWER_DETAIL,
+    THREAD_OVERVIEW,
+    THREAD_DETAIL,
     QUESTION_PICK,
     QUESTION_SUBMIT
 }
@@ -51,8 +50,8 @@ export default class App extends React.Component<{}, AppState> {
             if (window.location.hash !== '') {
                 return;
             }
-            if (this.state.layout > Layout.ANSWER_OVERVIEW) {
-                this.setLayout(Layout.ANSWER_OVERVIEW);
+            if (this.state.layout > Layout.THREAD_OVERVIEW) {
+                this.setLayout(Layout.THREAD_OVERVIEW);
             } else if (this.state.layout !== Layout.SUBJECT_SELECT) {
                 window.location.reload();
             }
@@ -109,15 +108,15 @@ export default class App extends React.Component<{}, AppState> {
                         this.setState({ threadList: packet.threads });
                     });
                     this.setState({ selectedGroup: id });
-                    this.setLayout(Layout.ANSWER_OVERVIEW);
+                    this.setLayout(Layout.THREAD_OVERVIEW);
                 }} />
-            case Layout.ANSWER_OVERVIEW:
-                return <AnswerOverviewLayout selectedSubject={this.state.selectedSubject as string} selectedGroup={this.state.selectedGroup as string} threadList={this.state.threadList} onNewThread={() => { this.setLayout(Layout.QUESTION_PICK); }} onThreadSelect={(thread) => {
+            case Layout.THREAD_OVERVIEW:
+                return <ThreadOverviewLayout selectedSubject={this.state.selectedSubject as string} selectedGroup={this.state.selectedGroup as string} threadList={this.state.threadList} onNewThread={() => { this.setLayout(Layout.QUESTION_PICK); }} onThreadSelect={(thread) => {
                     this.setState({ selectedThread: thread.id });
-                    this.setLayout(Layout.ANSWER_DETAIL);
+                    this.setLayout(Layout.THREAD_DETAIL);
                 }} />
-            case Layout.ANSWER_DETAIL:
-                return <AnswerDetailLayout />
+            case Layout.THREAD_DETAIL:
+                return <ThreadDetailLayout />
             case Layout.QUESTION_PICK:
                 return <QuestionPickLayout />
             case Layout.QUESTION_SUBMIT:

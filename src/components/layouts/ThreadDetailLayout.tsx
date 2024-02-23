@@ -1,10 +1,10 @@
 import * as React from 'react';
 import MainView from '@components/views/MainView';
 
-export type AnswerDetailLayoutProps = {
+export type ThreadDetailLayoutProps = {
 }
 
-export default class AnswerDetailLayout extends React.Component<AnswerDetailLayoutProps> {
+export default class ThreadDetailLayout extends React.Component<ThreadDetailLayoutProps> {
     render(): React.ReactNode {
         return <MainView title='Answer'>
         </MainView>
