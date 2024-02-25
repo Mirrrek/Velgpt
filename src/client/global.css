@@ -29,6 +29,7 @@ body {
     color: var(--color-light);
     background-color: var(--color-background);
     overflow-wrap: break-word;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .material-symbols-outlined {
