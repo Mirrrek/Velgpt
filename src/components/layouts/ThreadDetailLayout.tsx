@@ -18,7 +18,7 @@ export type ThreadDetailLayoutProps = {
 
 export default class ThreadDetailLayout extends React.Component<ThreadDetailLayoutProps> {
     render(): React.ReactNode {
-        return <MainView title={<TextContainer spaced><TextContainer><Clickable button={{ icon: 'arrow_back_ios', onClick: this.props.onBack }} />{this.props.thread.question !== null && <MediumText>Question <MediumText bold>{this.props.thread.question}&nbsp;</MediumText></MediumText>}Thread</TextContainer><Clickable button={{ icon: 'task', onClick: this.props.onAnswer }} /></TextContainer>}>
+        return <MainView title={<TextContainer spaced><TextContainer><Clickable icon='arrow_back_ios' onClick={this.props.onBack} />{this.props.thread.question !== null && <MediumText>Question <MediumText bold>{this.props.thread.question}&nbsp;</MediumText></MediumText>}Thread</TextContainer><Clickable icon='task' onClick={this.props.onAnswer} /></TextContainer>}>
             {this.props.thread.messages.map((message, i) => {
                 switch (message.type) {
                     case 'user':
