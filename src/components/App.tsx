@@ -6,7 +6,8 @@ import SignInLayout from '@components/layouts/SignInLayout';
 import UserOverviewLayout from '@components/layouts/UserOverviewLayout';
 import GroupSelectLayout from '@components/layouts/GroupSelectLayout';
 import ThreadOverviewLayout from '@components/layouts/ThreadOverviewLayout';
-import ThreadDetailLayout from './layouts/ThreadDetailLayout';
+import ThreadDetailLayout from '@components/layouts/ThreadDetailLayout';
+import ThreadAnswerLayout from '@components/layouts/ThreadAnswerLayout';
 import QuestionPickLayout from '@components/layouts/QuestionPickLayout';
 import QuestionSubmitLayout from '@components/layouts/QuestionSubmitLayout';
 import LoadingLayout from '@components/layouts/LoadingLayout';
@@ -19,6 +20,7 @@ enum Layout {
     GROUP_SELECT,
     THREAD_OVERVIEW,
     THREAD_DETAIL,
+    THREAD_ANSWER,
     QUESTION_PICK,
     QUESTION_SUBMIT
 }
@@ -127,6 +129,8 @@ export default class App extends React.Component<{}, AppState> {
                         message
                     });
                 }} onAnswer={() => { this.setLayout(Layout.THREAD_ANSWER); }} />
+            case Layout.THREAD_ANSWER:
+                return <ThreadAnswerLayout />
             case Layout.QUESTION_PICK:
                 return <QuestionPickLayout />
             case Layout.QUESTION_SUBMIT:
