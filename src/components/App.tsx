@@ -53,7 +53,17 @@ export default class App extends React.Component<{}, AppState> {
                 return;
             }
             if (this.state.layout > Layout.THREAD_OVERVIEW) {
-                this.setLayout(Layout.THREAD_OVERVIEW);
+                switch (this.state.layout) {
+                    case Layout.THREAD_ANSWER:
+                        this.setLayout(Layout.THREAD_DETAIL);
+                        break;
+                    case Layout.QUESTION_SUBMIT:
+                        this.setLayout(Layout.QUESTION_PICK);
+                        break;
+                    default:
+                        this.setLayout(Layout.THREAD_OVERVIEW);
+                        break;
+                }
             } else if (this.state.layout !== Layout.SUBJECT_SELECT) {
                 window.location.reload();
             }
