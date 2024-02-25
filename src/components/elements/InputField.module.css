@@ -1,0 +1,39 @@
+.inputField {
+    position: absolute;
+    display: flex;
+    align-items: start;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: var(--color-background);
+}
+
+.textarea {
+    flex-grow: 1;
+    padding: 1rem;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    color: var(--color-text);
+    font-family: inherit;
+    font-size: var(--font-size-tiny);
+    resize: none;
+}
+
+.button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 4rem;
+    height: 4rem;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    color: var(--color-text);
+    cursor: pointer;
+    user-select: none;
+}
+
+.disabled {
+    opacity: 0.5;
+}

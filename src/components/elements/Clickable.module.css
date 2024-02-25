@@ -1,0 +1,9 @@
+.clickable {
+    margin: 0 0.5rem;
+    cursor: pointer;
+    user-select: none;
+}
+
+.clickable:active {
+    opacity: 0.5;
+}

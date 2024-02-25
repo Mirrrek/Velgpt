@@ -116,7 +116,17 @@ export default class App extends React.Component<{}, AppState> {
                     this.setLayout(Layout.THREAD_DETAIL);
                 }} />
             case Layout.THREAD_DETAIL:
-                return <ThreadDetailLayout />
+                return <ThreadDetailLayout thread={this.state.threadList.find((thread) => thread.id === this.state.selectedThread)!} onBack={() => { this.setLayout(Layout.THREAD_OVERVIEW); }} onSend={(message) => {
+                    if (window.connection === undefined) {
+                        this.setLayout(Layout.GROUP_SELECT);
+                        return;
+                    }
+                    log('INFO', `Sending message "${message}"`);
+                    window.connection.send<packets.WriteMessagePacket>(packets.PacketType.SB_WRITE_MESSAGE, {
+                        id: this.state.selectedThread!,
+                        message
+                    });
+                }} onAnswer={() => { this.setLayout(Layout.THREAD_ANSWER); }} />
             case Layout.QUESTION_PICK:
                 return <QuestionPickLayout />
             case Layout.QUESTION_SUBMIT:
