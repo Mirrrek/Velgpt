@@ -3,8 +3,9 @@ import styles from '@components/elements/InputField.module.css';
 
 export type InputFieldProps = {
     placeholder: string;
-    active: boolean;
+    icon: string;
     onSend: (message: string) => void;
+    disabled?: boolean;
 }
 
 type InputFieldState = {
@@ -24,12 +25,12 @@ export default class InputField extends React.Component<InputFieldProps, InputFi
                 e.target.style.height = `${Math.min(e.target.scrollHeight, 160)}px`;
                 this.setState({ message: e.target.value });
             }} />
-            <button className={styles.button + ((!this.props.active || this.state.message.trim() === '') ? ' ' + styles.disabled : '')} onClick={() => {
-                if (this.props.active && this.state.message.trim() !== '') {
+            <button className={styles.button + ((this.props.disabled || this.state.message.trim() === '') ? ' ' + styles.disabled : '')} onClick={() => {
+                if (!this.props.disabled && this.state.message.trim() !== '') {
                     this.props.onSend(this.state.message.trim());
                     this.setState({ message: '' });
                 }
-            }}><span className='material-symbols-outlined' style={{ margin: 0 }}>send</span></button>
+            }}><span className='material-symbols-outlined' style={{ margin: 0 }}>{this.props.icon}</span></button>
         </div>
     }
 }

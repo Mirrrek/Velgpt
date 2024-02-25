@@ -44,7 +44,7 @@ export default class ThreadDetailLayout extends React.Component<ThreadDetailLayo
                         }
                 }
             })}
-            <InputField placeholder="Type a message..." active={this.props.thread.state === 'ready'} onSend={this.props.onSend} />
+            <InputField placeholder='Type a message...' icon='send' onSend={this.props.onSend} disabled={this.props.thread.state !== 'ready'} />
         </MainView>
     }
 }
