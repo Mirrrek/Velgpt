@@ -5,6 +5,7 @@ export type Configuration = {
     groups: Group[];
     terms: TermCategory[];
     questionSuggestions: QuestionSuggestion[];
+    answerSuggestions: AnswerSuggestionCategory[];
 }[];
 
 type Group = {
@@ -30,6 +31,8 @@ type QuestionChunk = {
 } | {
     type: 'input';
 }
+
+type AnswerSuggestionCategory = string[];
 
 const configuration: Configuration = [{
     id: 'ch',
@@ -88,7 +91,11 @@ const configuration: Configuration = [{
             type: 'text',
             text: '?'
         }]
-    }]
+    }],
+    answerSuggestions: [
+        ['A', 'B', 'C', 'D'],
+        ['Ano', 'Ne']
+    ]
 }, {
     id: 'bi',
     name: 'Bi',
@@ -127,7 +134,11 @@ const configuration: Configuration = [{
             type: 'text',
             text: '?'
         }]
-    }]
+    }],
+    answerSuggestions: [
+        ['A', 'B', 'C', 'D'],
+        ['Ano', 'Ne']
+    ]
 }];
 
 export default configuration;
