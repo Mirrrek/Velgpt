@@ -140,7 +140,18 @@ export default class App extends React.Component<{}, AppState> {
                     });
                 }} onAnswer={() => { this.setLayout(Layout.THREAD_ANSWER); }} />
             case Layout.THREAD_ANSWER:
-                return <ThreadAnswerLayout />
+                return <ThreadAnswerLayout selectedSubject={this.state.selectedSubject as string} onBack={() => { this.setLayout(Layout.THREAD_DETAIL); }} onSelect={(answer) => {
+                    if (window.connection === undefined) {
+                        this.setLayout(Layout.GROUP_SELECT);
+                        return;
+                    }
+                    log('INFO', `Selecting answer "${answer}"`);
+                    window.connection.send<packets.AnswerThreadPacket>(packets.PacketType.SB_ANSWER_THREAD, {
+                        id: this.state.selectedThread!,
+                        answer
+                    });
+                    this.setLayout(Layout.THREAD_OVERVIEW);
+                }} />
             case Layout.QUESTION_PICK:
                 return <QuestionPickLayout />
             case Layout.QUESTION_SUBMIT:
